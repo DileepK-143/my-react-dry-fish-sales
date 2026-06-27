@@ -1,0 +1,137 @@
+import { useMemo, useState } from "react";
+import "./CustomersManagement.css";
+
+function CustomersManagement({ orders = [] }) {
+  const [search, setSearch] = useState("");
+
+  const customers = useMemo(() => {
+    const grouped = {};
+
+    orders.forEach((order) => {
+      const phone = order.customer.phone;
+
+      if (!grouped[phone]) {
+        grouped[phone] = {
+          name: order.customer.name,
+          phone: order.customer.phone,
+          city: order.customer.city,
+          totalOrders: 0,
+          totalSpent: 0,
+          lastOrder: order.date,
+        };
+      }
+
+      grouped[phone].totalOrders += 1;
+      grouped[phone].totalSpent += order.total;
+
+      if (
+        new Date(order.date) >
+        new Date(grouped[phone].lastOrder)
+      ) {
+        grouped[phone].lastOrder = order.date;
+      }
+    });
+
+    return Object.values(grouped);
+  }, [orders]);
+
+  const filteredCustomers = customers.filter(
+    (customer) =>
+      customer.name
+        .toLowerCase()
+        .includes(search.toLowerCase()) ||
+      customer.phone.includes(search)
+  );
+  console.log("Orders:", orders);
+console.log("Customers:", customers);
+
+  return (
+    <div className="customers-management">
+
+      <div className="customers-header">
+
+        <h2>👥 Customers Management</h2>
+
+        <input
+          type="text"
+          placeholder="Search Customer..."
+          value={search}
+          onChange={(e) =>
+            setSearch(e.target.value)
+          }
+        />
+
+      </div>
+
+      <div className="customer-card">
+
+        <h3>Total Customers</h3>
+
+        <p>{customers.length}</p>
+
+      </div>
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>City</th>
+            <th>Orders</th>
+            <th>Total Spent</th>
+            <th>Last Order</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          {filteredCustomers.length === 0 ? (
+
+            <tr>
+
+              <td colSpan="6">
+                No Customers Found
+              </td>
+
+            </tr>
+
+          ) : (
+
+            filteredCustomers.map((customer) => (
+
+              <tr key={customer.phone}>
+
+                <td>{customer.name}</td>
+
+                <td>{customer.phone}</td>
+
+                <td>{customer.city}</td>
+
+                <td>{customer.totalOrders}</td>
+
+                <td>₹{customer.totalSpent}</td>
+
+                <td>
+                  {new Date(
+                    customer.lastOrder
+                  ).toLocaleDateString()}
+                </td>
+
+              </tr>
+
+            ))
+
+          )}
+
+        </tbody>
+
+      </table>
+
+    </div>
+  );
+}
+
+export default CustomersManagement;

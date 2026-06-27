@@ -6,6 +6,7 @@ import RecentOrders from "../Components/RecentOrders";
 import ProductsManagement from "../Components/ProductsManagement";
 import OrdersManagement from "../Components/OrdersManagement";
 import RevenueChart from "../Components/RevenueChart";
+import CustomersManagement from "../Components/CustomersManagement";
 
 
 function Admin({
@@ -49,6 +50,11 @@ function Admin({
   orders={orders}
   setOrders={setOrders}
 />)}
+{activeMenu === "Customers" && (
+  <CustomersManagement
+    orders={orders}
+  />
+)}
 
       </div>
 
