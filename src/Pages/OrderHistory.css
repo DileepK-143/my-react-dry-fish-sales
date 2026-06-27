@@ -1,0 +1,164 @@
+.order-history-page {
+  min-height: 100vh;
+  background: #f4f6f9;
+  padding: 120px 20px 50px;
+}
+
+.order-history-page h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #1d3557;
+  font-size: 36px;
+}
+
+.empty-orders {
+  text-align: center;
+  padding: 60px;
+  color: #555;
+}
+
+.order-card {
+  max-width: 900px;
+  margin: 30px auto;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  padding: 25px;
+  transition: 0.3s;
+}
+
+.order-card:hover {
+  transform: translateY(-5px);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-header h3 {
+  margin: 0;
+  color: #222;
+}
+
+.order-header p {
+  color: gray;
+  margin-top: 5px;
+}
+
+.status {
+  background: #e8fff0;
+  color: #0a8f3d;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.order-item {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.order-item img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.order-info {
+  flex: 1;
+}
+
+.order-info h4 {
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.order-info p {
+  margin: 6px 0;
+  color: #666;
+}
+
+.customer-details {
+  margin-top: 20px;
+}
+
+.customer-details h4 {
+  margin-bottom: 10px;
+  color: #1d3557;
+}
+
+.customer-details p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.order-total {
+  margin-top: 25px;
+  text-align: right;
+}
+
+.order-total h2 {
+  color: #d62828;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+@media (max-width: 768px) {
+  .order-item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .order-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .order-total {
+    text-align: center;
+  }
+}
+.order-again-btn {
+  margin-top: 15px;
+  padding: 12px 25px;
+  background: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.order-again-btn:hover {
+  background: #e68900;
+  transform: scale(1.05);
+}
+.invoice-btn {
+  margin-top: 10px;
+  margin-left: 10px;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 8px;
+  background: #1976d2;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.invoice-btn:hover {
+  background: #125aa0;
+  transform: scale(1.05);
+}
