@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./ProductDetails.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import products from "../data/products";
+import products from "../data/Products";
 import { toast } from "react-toastify";
 
 function ProductDetails({

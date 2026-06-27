@@ -1,5 +1,5 @@
 import "./DashboardCards.css";
-import products from "../data/products";
+import products from "../data/Products";
 
 function DashboardCards({ orders }) {
   const totalProducts = products.length;
