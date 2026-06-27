@@ -4,21 +4,21 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import OrderHistory from "./pages/OrderHistory";
-import Home from "./pages/Home";
-import Products from "./pages/Products";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
-import DryPrawns from "./pages/DryPrawns";
-import DryFish from "./pages/DryFish";
-import SquidsOctopus from "./pages/SquidOctopus";
-import DryCrabs from "./pages/DryCrabs";
+import OrderHistory from "./Pages/OrderHistory";
+import Home from "./Pages/Home";
+import Products from "./Pages/Products";
+import About from "./Pages/About";
+import Contact from "./Pages/Contact";
+import Cart from "./Pages/Cart";
+import Checkout from "./Pages/Checkout";
+import DryPrawns from "./Pages/DryPrawns";
+import DryFish from "./Pages/DryFish";
+import SquidsOctopus from "./Pages/SquidOctopus";
+import DryCrabs from "./Pages/DryCrabs";
 import DryShellFish from "./pages/DryShellFish";
-import ProductDetails from "./pages/ProductDetails";
-import Wishlist from "./pages/Wishlist";
-import Admin from "./pages/Admin";
+import ProductDetails from "./Pages/ProductDetails";
+import Wishlist from "./Pages/Wishlist";
+import Admin from "./Pages/Admin";
 
 
 function App() {
