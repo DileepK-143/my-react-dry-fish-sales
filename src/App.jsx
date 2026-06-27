@@ -15,7 +15,7 @@ import DryPrawns from "./Pages/DryPrawns";
 import DryFish from "./Pages/DryFish";
 import SquidsOctopus from "./Pages/SquidOctopus";
 import DryCrabs from "./Pages/DryCrabs";
-import DryShellFish from "./pages/DryShellFish";
+import DryShellFish from "./Pages/DryShellFish";
 import ProductDetails from "./Pages/ProductDetails";
 import Wishlist from "./Pages/Wishlist";
 import Admin from "./Pages/Admin";
