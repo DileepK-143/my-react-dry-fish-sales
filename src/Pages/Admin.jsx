@@ -1,11 +1,11 @@
 import { useState } from "react";
-import AdminSidebar from "../components/AdminSidebar";
+import AdminSidebar from "../Components/AdminSidebar";
 import "./Admin.css";
-import DashboardCards from "../components/DashboardCards";
-import RecentOrders from "../components/RecentOrders";
-import ProductsManagement from "../components/ProductsManagement";
-import OrdersManagement from "../components/OrdersManagement";
-import RevenueChart from "../components/RevenueChart";
+import DashboardCards from "../Components/DashboardCards";
+import RecentOrders from "../Components/RecentOrders";
+import ProductsManagement from "../Components/ProductsManagement";
+import OrdersManagement from "../Components/OrdersManagement";
+import RevenueChart from "../Components/RevenueChart";
 
 
 function Admin({
