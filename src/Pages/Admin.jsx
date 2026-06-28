@@ -7,6 +7,7 @@ import ProductsManagement from "../Components/ProductsManagement";
 import OrdersManagement from "../Components/OrdersManagement";
 import RevenueChart from "../Components/RevenueChart";
 import CustomersManagement from "../Components/CustomersManagement";
+import SettingsManagement from "../Components/SettingsManagement";
 
 
 function Admin({
@@ -54,6 +55,9 @@ function Admin({
   <CustomersManagement
     orders={orders}
   />
+)}
+{activeMenu === "Settings" && (
+  <SettingsManagement />
 )}
 
       </div>

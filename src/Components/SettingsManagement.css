@@ -1,0 +1,86 @@
+.settings-page {
+  padding: 30px;
+}
+
+.settings-page h2 {
+  margin-bottom: 25px;
+  color: #1e293b;
+}
+
+.settings-form {
+  max-width: 700px;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.settings-form label {
+  display: block;
+  margin-top: 18px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.settings-form input,
+.settings-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+
+.settings-form input:focus,
+.settings-form textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.2);
+}
+
+.settings-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.settings-form h3 {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: #1d4ed8;
+}
+
+.settings-form label input[type="checkbox"] {
+  width: auto;
+  margin-right: 10px;
+}
+
+.save-btn {
+  margin-top: 30px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #16a34a;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.save-btn:hover {
+  background: #15803d;
+}
+
+@media (max-width: 768px) {
+  .settings-page {
+    padding: 15px;
+  }
+
+  .settings-form {
+    padding: 20px;
+  }
+}
