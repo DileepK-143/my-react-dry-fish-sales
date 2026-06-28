@@ -161,26 +161,25 @@ console.log("Customers:", customers);
 <h3>📦 Order History</h3>
 
 {selectedCustomer.orders.map((order, index) => (
-  <div
-    key={index}
-    className="order-history-card"
-  >
-    <p>
-      <strong>Order:</strong> #{index + 1}
-    </p>
+  <div key={index} className="order-history-card">
 
-    <p>
-      <strong>Amount:</strong> ₹{order.total}
-    </p>
+    <h4>📦 Order #{index + 1}</h4>
 
-    <p>
-      <strong>Status:</strong> {order.status}
-    </p>
+    <p><strong>Amount:</strong> ₹{order.total}</p>
+    <p><strong>Status:</strong> {order.status}</p>
+    <p><strong>Date:</strong> {new Date(order.date).toLocaleDateString()}</p>
 
-    <p>
-      <strong>Date:</strong>{" "}
-      {new Date(order.date).toLocaleDateString()}
-    </p>
+    <h5>Items</h5>
+
+    <ul className="customer-items-list">
+      {order.items.map((item, i) => (
+        <li key={i}>
+          🐟 {item.name} × {item.quantity}
+          <span> ₹{item.price}</span>
+        </li>
+      ))}
+    </ul>
+
   </div>
 ))}
       <button
