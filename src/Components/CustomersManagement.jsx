@@ -170,7 +170,7 @@ console.log("Customers:", customers);
     </p>
 
     <p>
-      <strong>Amount:</strong> ₹{order.finalAmount}
+      <strong>Amount:</strong> ₹{order.total}
     </p>
 
     <p>
