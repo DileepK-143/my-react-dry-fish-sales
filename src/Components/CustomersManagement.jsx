@@ -3,6 +3,7 @@ import "./CustomersManagement.css";
 
 function CustomersManagement({ orders = [] }) {
   const [search, setSearch] = useState("");
+const [selectedCustomer, setSelectedCustomer] = useState(null);
 
   const customers = useMemo(() => {
     const grouped = {};
@@ -82,6 +83,7 @@ console.log("Customers:", customers);
             <th>Orders</th>
             <th>Total Spent</th>
             <th>Last Order</th>
+            <th>Action</th>
           </tr>
 
         </thead>
@@ -119,6 +121,14 @@ console.log("Customers:", customers);
                     customer.lastOrder
                   ).toLocaleDateString()}
                 </td>
+                <td>
+  <button
+    className="view-btn"
+    onClick={() => setSelectedCustomer(customer)}
+  >
+    👁 View
+  </button>
+</td>
 
               </tr>
 
@@ -129,6 +139,32 @@ console.log("Customers:", customers);
         </tbody>
 
       </table>
+      {selectedCustomer && (
+  <div className="customer-popup-overlay">
+    <div className="customer-popup">
+
+      <h2>👤 Customer Details</h2>
+
+      <p><strong>Name:</strong> {selectedCustomer.name}</p>
+      <p><strong>Phone:</strong> {selectedCustomer.phone}</p>
+      <p><strong>City:</strong> {selectedCustomer.city}</p>
+      <p><strong>Total Orders:</strong> {selectedCustomer.totalOrders}</p>
+      <p><strong>Total Spent:</strong> ₹{selectedCustomer.totalSpent}</p>
+      <p>
+        <strong>Last Order:</strong>{" "}
+        {new Date(selectedCustomer.lastOrder).toLocaleString()}
+      </p>
+
+      <button
+        className="close-btn"
+        onClick={() => setSelectedCustomer(null)}
+      >
+        Close
+      </button>
+
+    </div>
+  </div>
+)}
 
     </div>
   );
