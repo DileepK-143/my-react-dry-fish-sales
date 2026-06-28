@@ -12,18 +12,20 @@ const [selectedCustomer, setSelectedCustomer] = useState(null);
       const phone = order.customer.phone;
 
       if (!grouped[phone]) {
-        grouped[phone] = {
-          name: order.customer.name,
-          phone: order.customer.phone,
-          city: order.customer.city,
-          totalOrders: 0,
-          totalSpent: 0,
-          lastOrder: order.date,
-        };
+       grouped[phone] = {
+  name: order.customer.name,
+  phone: order.customer.phone,
+  city: order.customer.city,
+  totalOrders: 0,
+  totalSpent: 0,
+  lastOrder: order.date,
+  orders: [],   // NEW
+};
       }
 
       grouped[phone].totalOrders += 1;
       grouped[phone].totalSpent += order.total;
+      grouped[phone].orders.push(order);
 
       if (
         new Date(order.date) >
@@ -154,7 +156,33 @@ console.log("Customers:", customers);
         <strong>Last Order:</strong>{" "}
         {new Date(selectedCustomer.lastOrder).toLocaleString()}
       </p>
+<hr />
 
+<h3>📦 Order History</h3>
+
+{selectedCustomer.orders.map((order, index) => (
+  <div
+    key={index}
+    className="order-history-card"
+  >
+    <p>
+      <strong>Order:</strong> #{index + 1}
+    </p>
+
+    <p>
+      <strong>Amount:</strong> ₹{order.finalAmount}
+    </p>
+
+    <p>
+      <strong>Status:</strong> {order.status}
+    </p>
+
+    <p>
+      <strong>Date:</strong>{" "}
+      {new Date(order.date).toLocaleDateString()}
+    </p>
+  </div>
+))}
       <button
         className="close-btn"
         onClick={() => setSelectedCustomer(null)}
