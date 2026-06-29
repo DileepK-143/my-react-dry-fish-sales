@@ -19,6 +19,7 @@ import DryShellFish from "./Pages/DryShellFish";
 import ProductDetails from "./Pages/ProductDetails";
 import Wishlist from "./Pages/Wishlist";
 import Admin from "./Pages/Admin";
+import { getOrders } from "./api/orderApi";
 
 
 function App() {
@@ -33,15 +34,7 @@ const [wishlist, setWishlist] = useState(() => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOption, setSortOption] = useState("");
   const [priceFilter, setPriceFilter] = useState("all");
-const [orders, setOrders] = useState(() => {
-  try {
-    const savedOrders = localStorage.getItem("orders");
-    return savedOrders ? JSON.parse(savedOrders) : [];
-  } catch (error) {
-    console.error("Error loading orders:", error);
-    return [];
-  }
-});
+const [orders, setOrders] = useState([]);
   useEffect(() => {
   localStorage.setItem("cart", JSON.stringify(cart));
 }, [cart]);
@@ -52,13 +45,18 @@ useEffect(() => {
   );
 }, [wishlist]);
 useEffect(() => {
+  loadOrders();
+}, []);
+
+const loadOrders = async () => {
   try {
-    localStorage.setItem("orders", JSON.stringify(orders));
-    console.log("Orders Saved:", orders.length);
+    const response = await getOrders();
+    setOrders(response.data);
   } catch (error) {
-    console.error("Error saving orders:", error);
+    console.error("Failed to load orders:", error);
   }
-}, [orders]);
+};
+
 
 
   return (
