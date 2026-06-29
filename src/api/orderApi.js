@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/orders";
-
+const API_URL = "https://my-react-dry-fish-sales.onrender.com/api/orders";
 export const getOrders = () => axios.get(API_URL);
 
 export const addOrder = (order) => axios.post(API_URL, order);
