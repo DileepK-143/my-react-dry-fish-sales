@@ -1,8 +1,11 @@
-import "./OrderHistory.css";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { jsPDF } from "jspdf";
+import { getOrders } from "../api/orderApi";
+import "./OrderHistory.css";
 function OrderHistory({
   orders,
+  setOrders,
   cart,
   setCart,
 }) {
@@ -10,9 +13,9 @@ function OrderHistory({
   const orderAgain = (order) => {
     let updatedCart = [...cart];
 
-    order.items.forEach((item) => {
-      const existingItem = updatedCart.find(
-        (cartItem) => cartItem.id === item.id
+(order.products || []).forEach((item) => {
+        const existingItem = updatedCart.find(
+        (cartItem) => cartItem.productId === item.productId
       );
 
       if (existingItem) {
@@ -35,26 +38,21 @@ function OrderHistory({
   doc.text("Kakinada Dry Seafood", 20, 20);
 
   doc.setFontSize(12);
-  doc.text(`Invoice No: ${order.id}`, 20, 35);
-  doc.text(`Date: ${new Date(order.date).toLocaleString()}`, 20, 45);
-
+doc.text(`Invoice No: ${order._id ? order._id.slice(-6) : "------"}`, 20, 35);
+doc.text(`Date: ${new Date(order.createdAt).toLocaleString()}`, 20, 45);
   doc.text("Customer Details", 20, 60);
-  doc.text(`Name: ${order.customer.name}`, 20, 70);
-  doc.text(`Phone: ${order.customer.phone}`, 20, 80);
-  doc.text(`Address: ${order.customer.address}`, 20, 90);
-  doc.text(
-    `City: ${order.customer.city} - ${order.customer.pincode}`,
-    20,
-    100
-  );
+doc.text(`Name: ${order.customerName}`, 20, 70);
+doc.text(`Phone: ${order.phone}`, 20, 80);
+doc.text(`Address: ${order.address}`, 20, 90);
+  
 
   let y = 120;
 
   doc.text("Products", 20, y);
   y += 10;
 
-  order.items.forEach((item) => {
-    doc.text(
+(order.products || []).forEach((item) => {
+      doc.text(
       `${item.name}  x${item.quantity}   ₹${item.price * item.quantity}`,
       20,
       y
@@ -69,16 +67,26 @@ function OrderHistory({
 
   y += 10;
 
-  doc.text(`Total Paid : ₹${order.total}`, 20, y);
-
+doc.text(`Total Paid : ₹${order.totalAmount}`, 20, y);
   y += 20;
 
   doc.setFontSize(16);
   doc.text("Thank You For Shopping ❤️", 20, y);
 
-  doc.save(`Invoice-${order.id}.pdf`);
-};
+doc.save(`Invoice-${order._id || "Order"}.pdf`);};
+console.log("Orders:", orders);
+useEffect(() => {
+  loadOrders();
+}, []);
 
+const loadOrders = async () => {
+  try {
+    const response = await getOrders();
+    setOrders(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
   return (
     <div className="order-history-page">
 
@@ -100,45 +108,52 @@ function OrderHistory({
 
             <div
               className="order-card"
-              key={order.id}
-            >
+key={order._id || Math.random()}           >
 
               <div className="order-header">
 
                 <div>
-                  <h3>Order #{order.id}</h3>
-                  <p>{new Date(order.date).toLocaleString()}</p>
-                </div>
+<h3>
+  Order #
+  {order._id ? order._id.slice(-6) : "------"}
+</h3>                  
+<p>
+  {order.createdAt
+    ? new Date(order.createdAt).toLocaleString()
+    : "Just Now"}
+</p>                </div>
 
                 <div className="status">
 
-  {order.status === "Processing" && (
-    <span>🟡 Processing</span>
+  {order.orderStatus === "Pending" && (
+    <span>🟡 Pending</span>
   )}
 
-  {order.status === "Packed" && (
+  {order.orderStatus === "Processing" && (
+    <span>🟠 Processing</span>
+  )}
+
+  {order.orderStatus === "Packed" && (
     <span>📦 Packed</span>
   )}
 
-  {order.status === "Shipped" && (
+  {order.orderStatus === "Shipped" && (
     <span>🚚 Shipped</span>
   )}
 
-  {order.status === "Delivered" && (
+  {order.orderStatus === "Delivered" && (
     <span>✅ Delivered</span>
   )}
 
 </div>
-
               </div>
 
               <hr />
 
-              {order.items.map((item) => (
-
+{(order.products || []).map((item) => (
                 <div
                   className="order-item"
-                  key={item.id}
+                  key={item.productId}
                 >
 
                   <img
@@ -170,18 +185,16 @@ function OrderHistory({
 
                 <h4>Delivery Address</h4>
 
-                <p>{order.customer.name}</p>
+                <p>{order.customerName}</p>
 
-                <p>{order.customer.phone}</p>
+                <p>{order.phone}</p>
 
-                <p>{order.customer.address}</p>
+                <p>{order.address}</p>
 
-                <p>
-                  {order.customer.city} - {order.customer.pincode}
-                </p>
+                
 
                 <p>
-                  Payment : {order.customer.payment}
+                  Payment : {order.paymentMethod}
                 </p>
 
               </div>
@@ -189,7 +202,7 @@ function OrderHistory({
               <div className="order-total">
 
                 <p>
-                  Subtotal : ₹{order.total - 50}
+                  Subtotal : ₹{order.totalAmount - 50}
                 </p>
 
                 <p>
@@ -197,7 +210,7 @@ function OrderHistory({
                 </p>
 
                 <h2>
-                  Total Paid : ₹{order.total}
+                  Total Paid : ₹{order.totalAmount}
                 </h2>
 
                 <button

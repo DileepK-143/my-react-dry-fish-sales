@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./Checkout.css";
+import { addOrder } from "../api/orderApi";
 
 function Checkout({
   cart,
@@ -56,8 +57,8 @@ const applyCoupon = () => {
   }
 };
 
-const placeOrder = () => {
-  if (cart.length === 0) {
+const placeOrder = async () => {
+    if (cart.length === 0) {
     toast.error("Your cart is empty!");
     return;
   }
@@ -74,16 +75,30 @@ const placeOrder = () => {
   }
 
   const newOrder = {
-    id: Date.now(),
-    customer: { ...customer },
-    items: cart.map((item) => ({ ...item })),
-    total: grandTotal,
-    date: new Date().toISOString(),
-    status: "Processing",
-  };
+  customerName: customer.name,
+  phone: customer.phone,
+  address: `${customer.address}, ${customer.city}, ${customer.pincode}`,
 
-  setOrders((prevOrders) => [...prevOrders, newOrder]);
+  products: cart.map((item) => ({
+    productId: item._id,
+    name: item.name,
+    price: item.price,
+    quantity: item.quantity,
+    image: item.image,
+  })),
 
+  totalAmount: grandTotal,
+
+  paymentMethod: customer.payment,
+};
+try {
+  // Save order to MongoDB
+  const response = await addOrder(newOrder);
+
+  // Save the MongoDB response (contains _id, createdAt, etc.)
+  setOrders((prev) => [...prev, response.data]);
+
+  // Clear cart
   setCart([]);
 
   toast.success("🎉 Order Placed Successfully!");
@@ -91,6 +106,11 @@ const placeOrder = () => {
   setTimeout(() => {
     navigate("/orders");
   }, 1500);
+
+} catch (error) {
+  console.error(error);
+  toast.error("❌ Failed to Place Order");
+}
 };
   return (
     <div className="checkout-page">

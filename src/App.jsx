@@ -200,8 +200,9 @@ useEffect(() => {
 <Route
   path="/orders"
   element={
-    <OrderHistory
+  <OrderHistory
   orders={orders}
+  setOrders={setOrders}
   cart={cart}
   setCart={setCart}
 />
