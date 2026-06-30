@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/database");
 const productRoutes = require("./routes/productRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const cartRoutes = require("./routes/cartRoutes");
 
 dotenv.config();
 console.log(process.env.MONGODB_URI);
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/cart", cartRoutes);
 
 // Test Route
 app.get("/", (req, res) => {
