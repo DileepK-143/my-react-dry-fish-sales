@@ -10,8 +10,8 @@
 
   color: white;
   font-family: Arial, sans-serif;
-  overflow: hidden;
-}
+overflow-x: hidden;
+overflow-y: auto;}
 
 /* DARK OVERLAY */
 .overlay {
@@ -187,4 +187,153 @@
 .register-btn:hover {
   background: #ff4420;
   transform: scale(1.05);
+}
+/* ========================= */
+/* FEATURED PRODUCTS */
+/* ========================= */
+
+.featured-section,
+.categories-section,
+.why-us {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 38px;
+  color: #fff;
+  margin-bottom: 35px;
+  font-weight: bold;
+  text-shadow: 2px 2px 10px rgba(0,0,0,.5);
+}
+
+.featured-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.featured-grid .card {
+  width: 240px;
+}
+
+/* ========================= */
+/* CATEGORY */
+/* ========================= */
+
+.category-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.category-card {
+  width: 190px;
+  padding: 30px 20px;
+  background: rgba(255,255,255,.12);
+  backdrop-filter: blur(8px);
+  border-radius: 15px;
+  text-decoration: none;
+  color: white;
+  transition: .3s;
+  font-size: 55px;
+}
+
+.category-card h3 {
+  margin-top: 15px;
+  font-size: 22px;
+}
+
+.category-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255,255,255,.2);
+  box-shadow: 0 10px 25px rgba(0,0,0,.35);
+}
+
+/* ========================= */
+/* WHY US */
+/* ========================= */
+
+.why-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.why-card {
+  width: 230px;
+  padding: 25px;
+  background: rgba(255,255,255,.12);
+  backdrop-filter: blur(8px);
+  border-radius: 15px;
+  transition: .3s;
+  color: white;
+  font-size: 45px;
+}
+
+.why-card h3 {
+  font-size: 24px;
+  margin: 15px 0;
+}
+
+.why-card p {
+  font-size: 16px;
+  opacity: .9;
+}
+
+.why-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0,0,0,.4);
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media (max-width:768px){
+
+.main-title{
+font-size:34px;
+}
+
+.tagline{
+font-size:17px;
+}
+
+.featured-grid,
+.category-grid,
+.why-grid{
+flex-direction:column;
+align-items:center;
+}
+
+.section-title{
+font-size:30px;
+}
+
+.card,
+.featured-grid .card,
+.category-card,
+.why-card{
+width:90%;
+max-width:320px;
+}
+
+.auth-buttons{
+position:static;
+justify-content:center;
+margin-top:20px;
+}
+
+.hero-section{
+margin-top:20px;
+}
+
 }
