@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./DryPrawns.css";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
