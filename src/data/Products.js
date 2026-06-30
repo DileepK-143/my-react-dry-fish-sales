@@ -21,7 +21,7 @@ const products = [
   { id: 101, name: "Ribbon Fish", price: 500, image: "/images/ribbon-fish.jpeg", badge: "⭐ Best Seller" , category: "fish" },
   { id: 102, name: "Anchovies", price: 400, image: "/images/anchovies.jpeg", badge: "🔥 Popular", category: "fish" },
     { id: 103, name: "Bombay Duck", price: 450, image: "/images/bombay-duck.jpeg", badge: "💥 Fresh", category: "fish" },
-    { id: 104, name: "  ", price: 550, image: "/images/mackerel.jpeg", badge: "👑 Premium", category: "fish" },
+    { id: 104, name: " Mackerel Fish ", price: 550, image: "/images/mackerel.jpeg", badge: "👑 Premium", category: "fish" },
     { id: 105, name: "Tuna Dry Fish", price: 650, image: "/images/tuna.jpeg", badge: "🌊 Coastal", category: "fish" },
     { id: 106, name: "Sardines", price: 350, image: "/images/sardines.jpeg", badge: "🐟 Popular", category: "fish" },
   { id: 107, name: "King Fish", price: 750, image: "/images/kingfish.jpeg", badge: "👑 Premium", category: "fish" },

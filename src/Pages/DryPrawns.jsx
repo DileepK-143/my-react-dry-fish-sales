@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./DryPrawns.css";
 import { useNavigate } from "react-router-dom";
-import { getProducts } from "../api/productApi";function DryPrawns({
+import { getProducts } from "../api/productApi";
+function DryPrawns({
   cart,
   setCart,
   searchQuery,
@@ -173,8 +174,7 @@ cartItem._id === item._id            ? {
 
         <div className="catering-cards">
 
-          {filteredItems.length === 0 ? (
-
+{sortedItems.length === 0 ? (
             <h2
               style={{
                 color: "white",
@@ -193,9 +193,11 @@ cartItem._id === item._id            ? {
                 className="card"
 key={item._id}              >
 
-                <span className="badge">
-                  {item.badge}
-                </span>
+               {item.badge && (
+  <span className="badge">
+    {item.badge}
+  </span>
+)}
 
                 <div
                   className="card-img"
@@ -241,8 +243,7 @@ key={item._id}              >
 
         </div>
 
-        {filteredItems.length > 0 && (
-
+{sortedItems.length > 0 && (
           <div className="pagination">
 
             <button
