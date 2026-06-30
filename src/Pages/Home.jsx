@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
+import { getProducts } from "../api/productApi";
 
 function Home() {
+  const [products, setProducts] = useState([]);
+
+useEffect(() => {
+  loadProducts();
+}, []);
+
+const loadProducts = async () => {
+  try {
+    const response = await getProducts();
+    setProducts(response.data.slice(0, 3));
+  } catch (error) {
+    console.error(error);
+  }
+};
   return (
     <div className="home-page">
       <div className="overlay"></div>
@@ -32,55 +47,41 @@ function Home() {
         </p>
 
         {/* PRODUCT CARDS */}
-        <div className="catering-cards">
+   <div className="catering-cards">
 
-          <Link to="/products" className="card-link">
-            <div className="card">
-              <span className="badge">⭐ Best Seller</span>
+  {products.map((item) => (
 
-              <div className="card-img">
-                <img
-                  src="/images/dry-prawns.jpeg"
-                  alt="Dry Prawns"
-                />
-              </div>
+    <Link
+      key={item._id}
+      to="/product-details"
+      state={item}
+      className="card-link"
+    >
 
-              <p>Dry Prawns</p>
-            </div>
-          </Link>
+      <div className="card">
 
-          <Link to="/products" className="card-link">
-            <div className="card">
-              <span className="badge">🔥 Popular</span>
+        {item.badge && (
+          <span className="badge">
+            {item.badge}
+          </span>
+        )}
 
-              <div className="card-img">
-                <img
-                  src="/images/anchovies.jpeg"
-                  alt="Anchovies"
-                />
-              </div>
-
-              <p>Anchovies</p>
-            </div>
-          </Link>
-
-          <Link to="/products" className="card-link">
-            <div className="card">
-              <span className="badge">🐟 Fresh Stock</span>
-
-              <div className="card-img">
-                <img
-                  src="/images/ribbon-fish.jpeg"
-                  alt="Ribbon Fish"
-                />
-              </div>
-
-              <p>Ribbon Fish</p>
-            </div>
-          </Link>
-
+        <div className="card-img">
+          <img
+            src={item.image}
+            alt={item.name}
+          />
         </div>
 
+        <p>{item.name}</p>
+
+      </div>
+
+    </Link>
+
+  ))}
+
+</div>
         <Link to="/products">
           <button className="view-more glow-button">
             Shop Now
