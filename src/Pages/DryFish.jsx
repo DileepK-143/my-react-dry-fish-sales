@@ -1,17 +1,32 @@
 import React, { useState } from "react";
 import "./DryPrawns.css";
 import { useNavigate } from "react-router-dom";
-import products from "../data/Products";
-
+import { useState, useEffect } from "react";
+import { getProducts } from "../api/productApi";
 function DryFish({
   cart,
   setCart,
   searchQuery,
  
 })  {
- const fish = products.filter(
-  (product) => product.category === "fish"
+ const [products, setProducts] = useState([]);
+
+const fish = products.filter(
+  (product) => product.category.toLowerCase() === "fish"
 );
+
+useEffect(() => {
+  loadProducts();
+}, []);
+
+const loadProducts = async () => {
+  try {
+    const response = await getProducts();
+    setProducts(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
   const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -80,13 +95,13 @@ const totalPages = Math.ceil(
 
    const addToCart = (item) => {
   const existingItem = cart.find(
-    (cartItem) => cartItem.id === item.id
+    (cartItem) => cartItem._id === item._id
   );
 
   if (existingItem) {
     setCart(
       cart.map((cartItem) =>
-        cartItem.id === item.id
+        cartItem._id === item._id
           ? {
               ...cartItem,
               quantity: cartItem.quantity + 1,
@@ -153,9 +168,12 @@ const totalPages = Math.ceil(
 
         <div className="catering-cards">
           {currentItems.map((item) => (
-            <div className="card" key={item.id}>
-              <span className="badge">{item.badge}</span>
-
+            <div className="card" key={item._id}>
+{item.badge && (
+  <span className="badge">
+    {item.badge}
+  </span>
+)}
               <div
   className="card-img"
   onClick={() =>
@@ -176,8 +194,8 @@ const totalPages = Math.ceil(
   style={{ cursor: "pointer" }}
 >
   {item.name}
-</h3>              <p className="price">{item.price}</p>
-
+</h3>              
+<p className="price">₹{item.price}</p>
                <button
                className="view-more"
                 onClick={() => addToCart(item)}
