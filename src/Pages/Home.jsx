@@ -47,41 +47,7 @@ const loadProducts = async () => {
         </p>
 
         {/* PRODUCT CARDS */}
-   <div className="catering-cards">
 
-  {products.map((item) => (
-
-    <Link
-      key={item._id}
-      to="/product-details"
-      state={item}
-      className="card-link"
-    >
-
-      <div className="card">
-
-        {item.badge && (
-          <span className="badge">
-            {item.badge}
-          </span>
-        )}
-
-        <div className="card-img">
-          <img
-            src={item.image}
-            alt={item.name}
-          />
-        </div>
-
-        <p>{item.name}</p>
-
-      </div>
-
-    </Link>
-
-  ))}
-
-</div>
         <Link to="/products">
           <button className="view-more glow-button">
             Shop Now
